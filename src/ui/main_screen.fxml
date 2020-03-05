@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainController">
@@ -40,7 +40,7 @@
                               <Label fx:id="txtLabelMiddle" text="Upload rasporeda iz infoeduke" BorderPane.alignment="CENTER" />
                            </center>
                            <bottom>
-                              <Pane id="paneSubjects" fx:id="paneSubjects" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                              <VBox fx:id="paneSubjects" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
                            </bottom>
                         </BorderPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">

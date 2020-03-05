@@ -8,7 +8,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("main_screen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ui/main_screen.fxml"));
         primaryStage.setTitle("Algebra Master 1.0.0");
         primaryStage.setScene(new Scene(root, 900, 500));
         primaryStage.show();

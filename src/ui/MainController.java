@@ -8,6 +8,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -23,7 +24,7 @@ public class MainController {
     private Circle circle;
 
     @FXML
-    private Pane paneSubjects;
+    private VBox paneSubjects;
     @FXML
     private Label txtLabelMiddle;
 
