@@ -29,11 +29,11 @@ public class SubjectsGCal extends ArrayList<GoogleCal> {
             sb.append(googleCalColumns[i]);
             sb.append(GoogleCal.DELIMITER);
         }
-        sb.append(googleCalColumns[i+1]);
+        sb.append(googleCalColumns[i++]);
         sb.append(System.lineSeparator());
-        forEach(x->{
-            sb.append(x.toString());
-        });
+        for (int j = 0; j < size(); j++) {
+            sb.append(get(j).toString());
+        }
         lines = sb.toString();
         return lines;
     }

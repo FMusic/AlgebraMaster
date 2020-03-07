@@ -88,7 +88,7 @@ public class GoogleCal {
                 startTime + DELIMITER +
                 endTime + DELIMITER +
                 desc + DELIMITER +
-                location + DELIMITER +
+                location +
                 System.lineSeparator();
     }
 }

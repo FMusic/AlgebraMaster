@@ -23,15 +23,12 @@ public class MainController {
     private String newSchedule;
     @FXML
     private Circle circle;
-
     @FXML
     private VBox paneSubjects;
     @FXML
     private Label txtLabelMiddle;
-
     @FXML
     private Button btnDownload;
-
     @FXML
     void onDragDroppedCircle(DragEvent event) {
         getFile(event);
@@ -81,7 +78,7 @@ public class MainController {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files(*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extFilter);
-        File file =fileChooser.showSaveDialog(txtLabelMiddle.getScene().getWindow());
+        File file = fileChooser.showSaveDialog(txtLabelMiddle.getScene().getWindow());
         try {
             FileUtils.saveStringToFile(file, newSchedule,".csv");
         } catch (FileNotFoundException e) {

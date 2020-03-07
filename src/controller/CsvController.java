@@ -11,17 +11,11 @@ public class CsvController {
     public static SubjectsGCal getGoogleFromAlgebra(String algebracsv){
         List<AlgebraEvent> algEvents = getAlgebraEvents(algebracsv);
         List<GoogleCal> googleEvents = getGoogleFromAlgList(algEvents);
-        StringBuilder sb = new StringBuilder();
-        googleEvents.forEach(x->{
-            sb.append(x.toString());
-        });
-        sb.append(System.lineSeparator());
         SubjectsGCal subs = new SubjectsGCal();
         for (int i = 0; i < googleEvents.size(); i++) {
             subs.add(googleEvents.get(i));
             subs.getSubjects().add(googleEvents.get(i).getSubject());
         }
-        subs.setLines(sb.toString());
         return subs;
     }
 
@@ -30,10 +24,10 @@ public class CsvController {
         algEvents.forEach(x->{
             GoogleCal gEvent = new GoogleCal();
             gEvent.setSubject(x.getStatus() + " " + x.getSubject());
-            gEvent.setDesc(x.getPlace() + "\n" + x.getLecturer());
+            gEvent.setDesc(x.getPlace() + " - " + x.getLecturer());
             gEvent.setStartDate(x.getDate());
             gEvent.setEndDate(x.getDate());
-            gEvent.setDesc(x.getPlace() + "\n" + x.getLecturer());
+            gEvent.setDesc(x.getPlace() + " - " + x.getLecturer());
             gEvent.setLocation("Algebra University College, Ilica 242, 10000, Zagreb, Croatia");
             gEvent.setStartTime(x.getTimeFrom());
             gEvent.setEndTime(x.getTimeTo());
