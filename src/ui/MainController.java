@@ -3,7 +3,9 @@ package ui;
 import controller.CsvController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -13,14 +15,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+import model.SubjectsGCal;
 import utils.FileUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainController {
     private String newSchedule;
+    private SubjectsGCal subs;
     @FXML
     private Circle circle;
     @FXML
@@ -30,6 +36,8 @@ public class MainController {
     @FXML
     private Button btnDownload;
     @FXML
+    private Button btnSubjects;
+    @FXML
     void onDragDroppedCircle(DragEvent event) {
         getFile(event);
     }
@@ -38,22 +46,44 @@ public class MainController {
         final Dragboard db = event.getDragboard();
         boolean isAccepted = db.getFiles().get(0).getName().toLowerCase().endsWith(".csv");
         if(db.hasFiles() && isAccepted){
-            newSchedule = processFile(db.getFiles().get(0));
-            btnDownload.setDisable(false);
+            processFile(db.getFiles().get(0));
+            btnDownload.setDisable(true);
         }
     }
 
-    private String processFile(File file) {
+    private void processFile(File file) {
         String newSch = "bla";
+        String sch = null;
         try {
-            String sch = FileUtils.readFile(file);
-            newSch = CsvController.getGoogleFromAlgebra(sch).getLines();
-            //newSch = utils.CsvAlgebraImporter.getNewScheduleFile(file);
+            sch = FileUtils.readFile(file);
         } catch (IOException e) {
             txtLabelMiddle.setText("Not good file");
-        } finally {
-            return newSch;
         }
+        subs = CsvController.getGoogleFromAlgebra(sch);
+        txtLabelMiddle.setText("File Processed");
+        subs.getSubjects().forEach(x->{
+            CheckBox cb = new CheckBox(x);
+            cb.setSelected(true);
+            paneSubjects.getChildren().add(cb);
+        });
+        btnSubjects.setDisable(false);
+    }
+
+    @FXML
+    void onBtnSubjectsClick(ActionEvent event) {
+        Set<String> strings = new HashSet<>();
+        for (Node child : paneSubjects.getChildren()) {
+            if(child instanceof CheckBox){
+                CheckBox cb = (CheckBox) child;
+                if (cb.isSelected()){
+                    String text = cb.getText();
+                    strings.add(text);
+                }
+            }
+        }
+        subs.setSubjects(strings);
+        newSchedule = subs.getLines();
+        btnDownload.setDisable(false);
     }
 
     @FXML

@@ -27,8 +27,8 @@ public class CsvController {
             gEvent.setDesc(x.getPlace() + " - " + x.getLecturer());
             gEvent.setStartDate(x.getDate());
             gEvent.setEndDate(x.getDate());
-            gEvent.setDesc(x.getPlace() + " - " + x.getLecturer());
-            gEvent.setLocation("Algebra University College, Ilica 242, 10000, Zagreb, Croatia");
+            gEvent.setDesc(x.getPlace() + " - " + x.getLecturer().replaceAll(","," "));
+            gEvent.setLocation("Algebra University College Ilica 242 10000 Zagreb Croatia");
             gEvent.setStartTime(x.getTimeFrom());
             gEvent.setEndTime(x.getTimeTo());
             google.add(gEvent);

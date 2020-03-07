@@ -32,7 +32,10 @@ public class SubjectsGCal extends ArrayList<GoogleCal> {
         sb.append(googleCalColumns[i++]);
         sb.append(System.lineSeparator());
         for (int j = 0; j < size(); j++) {
-            sb.append(get(j).toString());
+            GoogleCal gEvent = get(j);
+            if (subjects.contains(gEvent.getSubject())) {
+                sb.append(gEvent.toString());
+            }
         }
         lines = sb.toString();
         return lines;
