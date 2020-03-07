@@ -2,20 +2,39 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Subjects extends ArrayList<GoogleCal> {
     private String lines;
-    private HashMap<Integer, String> subjects;
+    private Set<String> subjects;
+    private static String[] googleCalColumns = {"Subject", "Start Date", "End Date","Start Time", "End Time","Description", "Location"};
 
-    public HashMap<Integer, String> getSubjects() {
+    public Subjects() {
+        subjects = new HashSet<>();
+    }
+
+    public Set<String> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(HashMap<Integer, String> subjects) {
+    public void setSubjects(Set<String> subjects) {
         this.subjects = subjects;
     }
 
     public String getLines() {
+        StringBuilder sb = new StringBuilder();
+        int i;
+        for (i = 0; i < googleCalColumns.length -1 ; i++) {
+            sb.append(googleCalColumns[i]);
+            sb.append(GoogleCal.DELIMITER);
+        }
+        sb.append(googleCalColumns[i+1]);
+        sb.append(System.lineSeparator());
+        forEach(x->{
+            sb.append(x.toString());
+        });
+        lines = sb.toString();
         return lines;
     }
 

@@ -16,12 +16,12 @@ public class CsvController {
         googleEvents.forEach(x->{
             sb.append(x.toString());
         });
+        sb.append(System.lineSeparator());
         Subjects subs = new Subjects();
-        final int[] counter = {0};
-        googleEvents.forEach(x->{
-            subs.add(x);
-            subs.getSubjects().put(counter[0]++, x.getSubject());
-        });
+        for (int i = 0; i < googleEvents.size(); i++) {
+            subs.add(googleEvents.get(i));
+            subs.getSubjects().add(googleEvents.get(i).getSubject());
+        }
         subs.setLines(sb.toString());
         return subs;
     }
@@ -30,21 +30,24 @@ public class CsvController {
         List<GoogleCal> google = new ArrayList<>();
         algEvents.forEach(x->{
             GoogleCal gEvent = new GoogleCal();
-
-            gEvent.setStartDate(x.getDate().split("-")[0]);
-            gEvent.setEndDate(x.getDate().split("-")[1]);
-            gEvent.setDesc(x.getPlace() + System.lineSeparator() + x.getLecturer());
+            gEvent.setSubject(x.getStatus() + " " + x.getSubject());
+            gEvent.setDesc(x.getPlace() + "\n" + x.getLecturer());
+            gEvent.setStartDate(x.getDate());
+            gEvent.setEndDate(x.getDate());
+            gEvent.setDesc(x.getPlace() + "\n" + x.getLecturer());
             gEvent.setLocation("Algebra University College, Ilica 242, 10000, Zagreb, Croatia");
-
+            gEvent.setStartTime(x.getTimeFrom());
+            gEvent.setEndTime(x.getTimeTo());
             google.add(gEvent);
         });
         return google;
     }
 
     private static List<AlgebraEvent> getAlgebraEvents(String csvAlg) {
+        //We're throwing away first line because we don't need it
         List<AlgebraEvent> algEvents = new ArrayList<>();
         String[] schLines = csvAlg.split(System.lineSeparator());
-        for (int i = 0; i < schLines.length; i++) {
+        for (int i = 1; i < schLines.length; i++) {
             AlgebraEvent ae = new AlgebraEvent();
             String[] line = schLines[i].split(AlgebraEvent.DELIMITER);
             ae.setDate(line[0]);
@@ -54,6 +57,7 @@ public class CsvController {
             ae.setLecturer(line[3]);
             ae.setStatus(line[4]);
             ae.setPlace(line[5]);
+            algEvents.add(ae);
         }
         return algEvents;
     }

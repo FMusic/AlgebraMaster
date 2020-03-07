@@ -79,13 +79,16 @@ public class GoogleCal {
         this.location = location;
     }
 
+    //"Subject", "Start Date", "End Date","Start Time", "End Time","Description", "Location"
     @Override
     public String toString() {
-        return subject + DELIMITER + startDate +
-                DELIMITER + startTime + DELIMITER +
+        return subject + DELIMITER +
+                startDate + DELIMITER +
                 endDate + DELIMITER +
-                endTime + DELIMITER + "false" +
-                DELIMITER + desc + DELIMITER +
-                location + DELIMITER + "false" + System.lineSeparator();
+                startTime + DELIMITER +
+                endTime + DELIMITER +
+                desc + DELIMITER +
+                location + DELIMITER +
+                System.lineSeparator();
     }
 }

@@ -1,5 +1,6 @@
 package ui;
 
+import controller.CsvController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -48,7 +49,9 @@ public class MainController {
     private String processFile(File file) {
         String newSch = "bla";
         try {
-            newSch = utils.CsvAlgebraImporter.getNewScheduleFile(file);
+            String sch = FileUtils.readFile(file);
+            newSch = CsvController.getGoogleFromAlgebra(sch).getLines();
+            //newSch = utils.CsvAlgebraImporter.getNewScheduleFile(file);
         } catch (IOException e) {
             txtLabelMiddle.setText("Not good file");
         } finally {
