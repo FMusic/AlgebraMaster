@@ -2,14 +2,13 @@ package controller;
 
 import model.AlgebraEvent;
 import model.GoogleCal;
-import model.Subject;
-import model.Subjects;
+import model.SubjectsGCal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CsvController {
-    public static Subjects getGoogleFromAlgebra(String algebracsv){
+    public static SubjectsGCal getGoogleFromAlgebra(String algebracsv){
         List<AlgebraEvent> algEvents = getAlgebraEvents(algebracsv);
         List<GoogleCal> googleEvents = getGoogleFromAlgList(algEvents);
         StringBuilder sb = new StringBuilder();
@@ -17,7 +16,7 @@ public class CsvController {
             sb.append(x.toString());
         });
         sb.append(System.lineSeparator());
-        Subjects subs = new Subjects();
+        SubjectsGCal subs = new SubjectsGCal();
         for (int i = 0; i < googleEvents.size(); i++) {
             subs.add(googleEvents.get(i));
             subs.getSubjects().add(googleEvents.get(i).getSubject());

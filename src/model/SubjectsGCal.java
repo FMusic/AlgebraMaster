@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Subjects extends ArrayList<GoogleCal> {
+public class SubjectsGCal extends ArrayList<GoogleCal> {
     private String lines;
     private Set<String> subjects;
     private static String[] googleCalColumns = {"Subject", "Start Date", "End Date","Start Time", "End Time","Description", "Location"};
 
-    public Subjects() {
+    public SubjectsGCal() {
         subjects = new HashSet<>();
     }
 
